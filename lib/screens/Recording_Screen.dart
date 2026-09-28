@@ -658,7 +658,6 @@ class _BleHomeState extends State<BleHome> with SingleTickerProviderStateMixin {
     final scoredEpochs = SleepScorer.scoreRows(
       currentSamples,
       algorithm: SleepAlgorithm.sadehScaledConvolved,
-      activityScale: 1.0,
     );
 
     await AppDb.replaceScoredEpochs(
