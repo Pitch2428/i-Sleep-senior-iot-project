@@ -82,7 +82,7 @@ class SleepScorer {
     List<Map<String, Object?>> rows, {
     int epochSeconds = 30,
     SleepAlgorithm algorithm = SleepAlgorithm.sadehScaledConvolved,
-    double activityScale = 500.0, 
+    double activityScale = 1.0, 
   }) {
     if (rows.isEmpty) return [];
 
