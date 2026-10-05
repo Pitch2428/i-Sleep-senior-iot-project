@@ -171,7 +171,6 @@ class SleepScorer {
     double currentAct = actAt(i);
     double logPenalty = (currentAct > 2.0) ? (0.75 * log(currentAct + 1.0)) : 0.0;
 
-    // Increased constant to 15.0 to handle M5StickC sensitivity
     return 7.601 - (0.065 * meanW11) - (1.08 * nat) - (0.056 * sd6) - logPenalty;
   }
 
