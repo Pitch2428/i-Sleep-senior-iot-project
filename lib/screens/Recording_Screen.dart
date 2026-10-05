@@ -75,21 +75,21 @@ class _BleHomeState extends State<BleHome> with SingleTickerProviderStateMixin {
   int _reconnectAttempts = 0;
   Timer? _connectionHealthTimer;
 
-  // ADDED: Data timeout handling
+  // Data timeout handling
   Timer? _dataTimeoutTimer;
   int _lastDataTimestamp = 0;
   static const int DATA_TIMEOUT_SECONDS = 15;
 
-  // ADDED: Performance optimization variables
+  // Performance optimization
   Timer? _uiThrottleTimer;
   int _lastUiUpdateTime = 0;
   static const int UI_UPDATE_INTERVAL_MS = 500;  // Update UI max twice per second
   int _totalSamplesReceived = 0;
 
-  // ADDED: Reconnection resume tracking
+  // Reconnection resume tracking incase of failure
   bool _isCatchingUp = false;
 
-  // ADDED: 5-Second Block Aggregation variables
+  // 5-Second Block Aggregation variables
   int _blockSampleCount = 0;
   double _blockHrSum = 0;
   double _blockActivitySum = 0;
@@ -106,7 +106,7 @@ class _BleHomeState extends State<BleHome> with SingleTickerProviderStateMixin {
   double _xAxis = 0.0, _yAxis = 0.0, _zAxis = 0.0;
   final List<double> _hrHistory = [];
   final List<double> _motionHistory = [];
-  final int _maxDataPoints = 100;  // CHANGED: from 50 to 100 for better display
+  final int _maxDataPoints = 100;  
   Map<String, dynamic>? _latestSync;
 
   // Recording
@@ -130,14 +130,14 @@ class _BleHomeState extends State<BleHome> with SingleTickerProviderStateMixin {
     );
     _checkPermissionsAndStart();
     _startConnectionHealthCheck();
-    _checkDatabaseSize(); // ADDED
+    _checkDatabaseSize(); 
   }
 
   @override
   void dispose() {
     _dataTimeoutTimer?.cancel();
     _connectionHealthTimer?.cancel();
-    _uiThrottleTimer?.cancel(); // ADDED
+    _uiThrottleTimer?.cancel(); 
     _scanSub?.cancel();
     _connSub?.cancel();
     _notifySub?.cancel();
@@ -155,7 +155,7 @@ class _BleHomeState extends State<BleHome> with SingleTickerProviderStateMixin {
     final bluetoothScanStatus = await Permission.bluetoothScan.status;
     final bluetoothConnectStatus = await Permission.bluetoothConnect.status;
     
-    // If permissions are already granted, just start scanning
+    // If permissions are already granted start scanning
     if (locationStatus.isGranted && 
         bluetoothScanStatus.isGranted && 
         bluetoothConnectStatus.isGranted) {
@@ -606,7 +606,7 @@ class _BleHomeState extends State<BleHome> with SingleTickerProviderStateMixin {
     await _connect(_connectedDeviceId!);
   }
 
-  // ADDED: Handle device disconnect and auto-save session
+  // Handle device disconnect and auto-save session
   Future<void> _handleDeviceDisconnected() async {
     debugPrint("BLE: Device disconnected during recording - auto-saving session");
     
@@ -627,7 +627,7 @@ class _BleHomeState extends State<BleHome> with SingleTickerProviderStateMixin {
     }
   }
 
-  // ADDED: Auto-save session on disconnect
+  // Auto-save session on disconnect
   Future<void> _autoSaveSession() async {
     setState(() => _isRecording = false);
     WakelockPlus.disable();
@@ -704,7 +704,7 @@ class _BleHomeState extends State<BleHome> with SingleTickerProviderStateMixin {
     }
   }
 
-  // ADDED: Show session saved dialog
+  // Show session saved dialog
   void _showSessionSavedDialog(double totalSleepMinutes, double sleepScore) {
     final hours = (totalSleepMinutes / 60).floor();
     final minutes = (totalSleepMinutes % 60).toInt();
@@ -760,7 +760,7 @@ class _BleHomeState extends State<BleHome> with SingleTickerProviderStateMixin {
     );
   }
 
-  // ADDED: Reset data timeout timer
+  // Reset data timeout timer
   void _resetDataTimeoutTimer() {
     _dataTimeoutTimer?.cancel();
     if (_isRecording) {
@@ -773,7 +773,7 @@ class _BleHomeState extends State<BleHome> with SingleTickerProviderStateMixin {
     }
   }
 
-  // ADDED: Database size monitoring
+  // Database size monitoring
   void _checkDatabaseSize() {
     Timer.periodic(const Duration(minutes: 5), (timer) async {
       if (!_isRecording) {
@@ -795,7 +795,7 @@ class _BleHomeState extends State<BleHome> with SingleTickerProviderStateMixin {
     });
   }
 
-  // ADDED: 5-Second block aggregation
+  // 5-Second block aggregation
 void _aggregateTo5sBlock(String line) {
   final parts = line.split(',');
   if (parts.length < 5) return;
@@ -856,7 +856,7 @@ void _aggregateTo5sBlock(String line) {
   }
 }
 
-  // MODIFIED: Added timeout reset and throttling, plus 5-second block aggregation
+  // MODIFIED: Added timeout reset and throttling plus 5-second block aggregation
   void _handleIncoming(Uint8List bytes) {
     try {
       final chunk = utf8.decode(bytes, allowMalformed: true);
