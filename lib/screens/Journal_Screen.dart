@@ -37,7 +37,7 @@ class _JournalScreenState extends State<JournalScreen> {
   bool _isProcessing = false;
   List<Map<String, dynamic>> _nights = [];
   
-  // Set to true for presentation screenshots, false for normal app use
+  // Set to true for presentation
   bool _demoMode = false;
 
   @override
@@ -53,7 +53,7 @@ class _JournalScreenState extends State<JournalScreen> {
     setState(() => _isLoading = true);
 
     try {
-      // DEMO MODE: For clean presentation screenshots
+      // Demo for presentation
       if (_demoMode) {
         final demoSessions = _generateRealisticDemoSessions();
         setState(() {
@@ -63,7 +63,7 @@ class _JournalScreenState extends State<JournalScreen> {
         return;
       }
       
-      // REAL DATA MODE
+      // Normal Data
       final db = await AppDb.db;
       final sessions = await db.query('sessions', orderBy: 'start_time_ms DESC');
 
@@ -88,11 +88,11 @@ class _JournalScreenState extends State<JournalScreen> {
     }
   }
 
-  // Generate realistic demo data matching your screenshots for May 18-23
+  // Generate demo data
   List<Map<String, dynamic>> _generateRealisticDemoSessions() {
     final demoSessions = <Map<String, dynamic>>[];
     
-    // Data based on your screenshots (May 18-23, 2026)
+    // Demo Showcase
     final List<Map<String, dynamic>> sleepData = [
       {
         'date': DateTime(2026, 5, 23),
@@ -602,7 +602,7 @@ class _JournalScreenState extends State<JournalScreen> {
       centerTitle: true,
       leading: _buildBackButton(),
       title: GestureDetector(
-        onLongPress: _toggleDemoMode,  // Long press title to toggle demo mode
+        onLongPress: _toggleDemoMode,  // Hold title to toggle demo mode
         child: const Text(
           "Sleep Journal",
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
