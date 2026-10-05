@@ -357,12 +357,12 @@ class _JournalScreenState extends State<JournalScreen> {
         ? SleepScorer.scoreRows(
             blocks,
             algorithm: SleepAlgorithm.sadehScaledConvolved,
-            activityScale: 0.1,
+            activityScale: 1.0,
           )
         : SleepScorer.scoreRows(
             await AppDb.getSamplesForSession(sessionId),
             algorithm: SleepAlgorithm.sadehScaledConvolved,
-            activityScale: 0.1,
+            activityScale: 1.0,
           );
 
     if (scoredEpochs.isEmpty) return;
