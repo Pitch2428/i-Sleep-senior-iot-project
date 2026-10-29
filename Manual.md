@@ -4,19 +4,20 @@ This section explains how to upload the firmware to your M5Stick C Plus 2 device
 ### Prerequisites:
 * M5Stick C Plus 2 device.
 * USB-C cable.
-* A computer or laptop with internet access.
-* UIFlow Web IDE (or Arduino IDE) installed.
+* A computer or laptop with the **Arduino IDE** installed.
+* (Windows users) CP210x USB to UART Bridge VCP Drivers installed.
+* The **M5Stack board manager** installed in the Arduino IDE.
 
 ### Step-by-Step Instructions:
-1. Plug the M5Stick C Plus 2 into your computer using the USB-C cable.
-2. Press the left button (power button) on the M5Stick to turn it on.
-3. Go to [flow.m5stack.com](https://flow.m5stack.com) in your web browser.
-4. Click the "Connect" button in the bottom right corner of the screen and select the correct COM port for your M5Stick.
-5. Locate the `sketch_nov21a` file from the project repository.
-6. Copy the code from the file.
-7. Paste the code into the workspace in the IDE.
-8. Click the **Run (▶)** button to upload the code to the device.
-9. Once uploaded, the M5Stick screen should display the startup screen for the i-Sleep project.
+1. **Connect the device:** Plug the M5Stick C Plus 2 into your computer using the USB-C cable.
+2. **Power On:** Press the left button (power button) on the M5Stick to turn it on.
+3. **Open Arduino IDE:** Launch the Arduino IDE on your computer.
+4. **Select the Board:** Go to **Tools > Board > M5Stack** and select **M5Stick-C**.
+5. **Select the Port:** Go to **Tools > Port** and select the correct COM port for your device.
+6. **Open the Code:** In the Arduino IDE, go to **File > Open** and navigate to the `m5_firmware/sketch_nov21a` folder in your downloaded project files. Open the `.ino` file.
+7. **Install Libraries (if needed):** If the code requires specific libraries, go to **Sketch > Include Library > Manage Libraries**, search for `M5StickCPlus2` or `M5Unified`, and click Install.
+8. **Upload:** Click the **Upload button** (the right-pointing arrow icon ➔) at the top left of the Arduino IDE.
+9. **Verify:** Wait for the "Done uploading" message. The M5Stick screen should now display the startup screen for the i-Sleep project.
 
 ---
 
